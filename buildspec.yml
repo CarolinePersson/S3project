@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+    commands:
+      - echo "Installerar Maven..."
+      - mvn --version
+  pre_build:
+    commands:
+      - echo "Starting build for S3 project..."
+      - mvn clean
+  build:
+    commands:
+      - echo "Building with Maven..."
+      - mvn package -DskipTests
+  post_build:
+    commands:
+      - echo "Build completed successfully"
+
+artifacts:
+  files:
+    - target/*.jar
+  discard-paths: yes
